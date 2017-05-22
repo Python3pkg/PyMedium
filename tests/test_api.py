@@ -55,7 +55,7 @@ class ApiResponseCase(unittest.TestCase):
 
     def test_user_api(self):
         user_dict = json.loads(self.user_req.text)
-        self.assertIn("username", user_dict.keys())
+        self.assertIn("username", list(user_dict.keys()))
         self.assertEqual(user_dict["username"], "enginebai")
 
     def test_publication_api(self):

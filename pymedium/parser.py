@@ -32,9 +32,9 @@ def parse_user(payload):
     # user.author_tags = parse_tags(author_tags)
 
     publication_ids = ref_dict["Collection"]
-    if publication_ids is not None and len(publication_ids.keys()) > 0:
+    if publication_ids is not None and len(list(publication_ids.keys())) > 0:
         publication_list = []
-        for pub_id in publication_ids.keys():
+        for pub_id in list(publication_ids.keys()):
             publication = parse_publication(payload, pub_id)
             publication_list.append(publication)
         if len(publication_list) > 0:
@@ -119,7 +119,7 @@ def parse_post(payload):
             creator_id = post_dict["creatorId"]
             username = ref_dict["User"][creator_id]["username"]
             url += "@{username}".format(username=username)
-        url += u"/{path}".format(path=unique_slug)
+        url += "/{path}".format(path=unique_slug)
 
         virtual_dict = post_dict["virtuals"]
         recommend_count = virtual_dict["recommends"]
@@ -153,7 +153,7 @@ def parse_post(payload):
     # print(post_list_payload)
     # payload -> references -> Post
     if type(post_list_payload) is dict:
-        for post_id in post_list_payload.keys():
+        for post_id in list(post_list_payload.keys()):
             post_dict = post_list_payload.get(post_id)
             post_list.append(parse_post_dict(post_dict, post_id))
     # payload -> value

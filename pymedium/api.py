@@ -51,7 +51,7 @@ def get_latest_posts_by_tag(tag_name):
 
 def send_request(url, headers=const.ACCEPT_HEADER, param=None, parse_function=None):
     req = requests.get(url, headers=headers, params=param)
-    print(url, req.status_code)
+    print((url, req.status_code))
     if req.status_code == requests.codes.ok:
         if parse_function is None:
             parse_function = parse_post

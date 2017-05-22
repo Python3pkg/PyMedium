@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 from enum import Enum
+import collections
 
 __author__ = 'enginebai'
 
@@ -348,8 +349,8 @@ class OutputFormat(Enum):
 
 def to_dict(model):
     return dict((get_key(key), value)
-                for key, value in model.__dict__.items()
-                if not callable(value) and not key.startswith("__"))
+                for key, value in list(model.__dict__.items())
+                if not isinstance(value, collections.Callable) and not key.startswith("__"))
 
 def get_key(key):
     return key.replace("_", "", 1) if key.startswith("_") else key
